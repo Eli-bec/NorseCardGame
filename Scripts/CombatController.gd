@@ -4,6 +4,10 @@ var tween:Tween
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	$Enemy.HP = Config.enemy_hp
+	$Enemy.max_HP = Config.enemy_hp
+	$Player.HP = Config.player_hp
+	$Player.max_HP = Config.player_hp
 	$Enemy/Deck.ratio = Config.enemy_deck_ratio
 	$Player/Deck.ratio = Config.player_deck_ratio
 	new_turn()

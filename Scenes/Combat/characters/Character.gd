@@ -2,8 +2,14 @@ extends Sprite2D
 class_name Character
 
 @export var Name:String = ''
-@export var HP:int = 1
-@export var max_HP:int = 1
+@export var HP:int = 1 :
+	set(value):
+		HP = value
+		update_HP()
+@export var max_HP:int = 1 :
+	set(value):
+		max_HP = value
+		update_HP()
 
 signal defeated
 
