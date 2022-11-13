@@ -1,0 +1,122 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu05t4l4n7ege"]
+
+[ext_resource type="Script" path="res://Scenes/ConfigScene/ConfigUI.gd" id="1_o5kgk"]
+[ext_resource type="PackedScene" uid="uid://cyieg2wh0dmfd" path="res://Scenes/ConfigScene/deck_ratio_input.tscn" id="2_8vwiu"]
+[ext_resource type="Script" path="res://Scenes/ConfigScene/StartButton.gd" id="3_eoxox"]
+[ext_resource type="Script" path="res://Scenes/ConfigScene/ShowEnemyCardsCheckButton.gd" id="3_w7vhw"]
+
+[node name="ConfigUI" type="ScrollContainer" node_paths=PackedStringArray("des_label", "enemyDeckRatio", "playerDeckRatio", "showEnemyCardplays")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o5kgk")
+des_label = NodePath("VBoxContainer/Panel/DescriptionLabel")
+enemyDeckRatio = NodePath("VBoxContainer/Row1/EnemyDeckRatioInput")
+playerDeckRatio = NodePath("VBoxContainer/Row2/PlayerDeckRatioInput")
+showEnemyCardplays = NodePath("VBoxContainer/Row3/ShowEnemyCardsCheckButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Row1" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 31.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Row1"]
+layout_mode = 2
+offset_top = 2.0
+offset_right = 146.0
+offset_bottom = 28.0
+text = "Enemy's deck ratio"
+
+[node name="EnemyDeckRatioInput" parent="VBoxContainer/Row1" instance=ExtResource("2_8vwiu")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 150.0
+offset_right = 407.0
+offset_bottom = 31.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Row2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 35.0
+offset_right = 1152.0
+offset_bottom = 66.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Row2"]
+layout_mode = 2
+offset_top = 2.0
+offset_right = 118.0
+offset_bottom = 28.0
+text = "Your deck ratio"
+
+[node name="PlayerDeckRatioInput" parent="VBoxContainer/Row2" instance=ExtResource("2_8vwiu")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 122.0
+offset_right = 379.0
+offset_bottom = 31.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Row3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 70.0
+offset_right = 1152.0
+offset_bottom = 96.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Row3"]
+layout_mode = 2
+offset_right = 225.0
+offset_bottom = 26.0
+text = "Show enemy's selected cards"
+
+[node name="ShowEnemyCardsCheckButton" type="CheckButton" parent="VBoxContainer/Row3"]
+layout_mode = 2
+offset_left = 229.0
+offset_right = 273.0
+offset_bottom = 26.0
+script = ExtResource("3_w7vhw")
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+offset_top = 394.0
+offset_right = 1152.0
+offset_bottom = 544.0
+size_flags_vertical = 10
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+offset_top = 548.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_font_sizes/font_size = 38
+text = "Start Game"
+script = ExtResource("3_eoxox")
+
+[connection signal="value_changed" from="VBoxContainer/Row1/EnemyDeckRatioInput" to="." method="_on_enemy_deck_ratio_input_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Row2/PlayerDeckRatioInput" to="." method="_on_player_deck_ratio_input_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Row3/ShowEnemyCardsCheckButton" to="VBoxContainer/Row3/ShowEnemyCardsCheckButton" method="_on_toggled"]
+[connection signal="pressed" from="VBoxContainer/StartButton" to="VBoxContainer/StartButton" method="_on_pressed"]

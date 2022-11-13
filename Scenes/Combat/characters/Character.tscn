@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://depp8xl4ebeqg"]
+
+[ext_resource type="Texture2D" uid="uid://cqeh6bba8af0w" path="res://Textures/character.png" id="1_8tado"]
+[ext_resource type="Script" path="res://Scenes/Combat/characters/Character.gd" id="2_l1l3h"]
+[ext_resource type="Theme" uid="uid://dawt8g54on14m" path="res://Fonts/CharInfoTheme.tres" id="3_dnck2"]
+
+[node name="Character" type="Sprite2D"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_8tado")
+script = ExtResource("2_l1l3h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.5
+offset_top = -349.0
+offset_right = -17.5
+offset_bottom = -163.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name Label" type="Label" parent="VBoxContainer"]
+offset_right = 221.0
+offset_bottom = 88.0
+theme = ExtResource("3_dnck2")
+horizontal_alignment = 1
+
+[node name="HP Label" type="Label" parent="VBoxContainer"]
+offset_top = 92.0
+offset_right = 221.0
+offset_bottom = 180.0
+theme = ExtResource("3_dnck2")
+horizontal_alignment = 1

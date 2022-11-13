@@ -1,0 +1,191 @@
+[gd_scene load_steps=15 format=3 uid="uid://bolavimnwaq5j"]
+
+[ext_resource type="Script" path="res://Scripts/CombatController.gd" id="1_nee2l"]
+[ext_resource type="Theme" uid="uid://c0l4yeoilph8f" path="res://Themes/UITheme.tres" id="2_btn0e"]
+[ext_resource type="PackedScene" uid="uid://depp8xl4ebeqg" path="res://Scenes/Combat/characters/Character.tscn" id="6_hcpsb"]
+[ext_resource type="PackedScene" uid="uid://b164vwyfkc3ex" path="res://Scenes/Combat/cards/deck.tscn" id="7_kqeib"]
+[ext_resource type="PackedScene" uid="uid://dwg6bjv4ghgmx" path="res://Scenes/Combat/slots/hand.tscn" id="8_58xg6"]
+[ext_resource type="Script" path="res://Scenes/Combat/characters/Enemy.gd" id="9_cipkr"]
+[ext_resource type="Script" path="res://Scenes/Combat/slots/CardSlots.gd" id="9_en13f"]
+[ext_resource type="PackedScene" uid="uid://d0hpumdjjr1ip" path="res://Scenes/Combat/slots/CardSlot.tscn" id="10_y2ssy"]
+[ext_resource type="PackedScene" path="res://Scenes/Combat/Pointers/big_pointer.tscn" id="12_a30sy"]
+[ext_resource type="PackedScene" path="res://Scenes/Combat/Pointers/small_pointer.tscn" id="13_wo7o5"]
+[ext_resource type="Script" path="res://Scenes/EndingScene/ConfigButton.gd" id="14_psfcq"]
+[ext_resource type="Theme" uid="uid://od47yukaf7pv" path="res://Themes/EndingScreenTheme.tres" id="15_7lpp5"]
+[ext_resource type="Script" path="res://Scripts/EndingScreen/RestartButton.gd" id="16_hl8ny"]
+
+[sub_resource type="GDScript" id="GDScript_15o05"]
+script/source = "extends Node
+
+@onready var pointers = [$Pointer1, $Pointer2, $Pointer3]
+@onready var pos_array = [
+	$Pointer1.position,
+	$Pointer2.position,
+	$Pointer3.position]
+@onready var big_pointer_pos = $BigPointer.position
+
+func reset_small_pointers():
+	for i in range(3):
+		pointers[i].position = pos_array[i]
+		pointers[i].visible = false
+
+func reset_big_pointer():
+	$BigPointer.position = big_pointer_pos
+	$BigPointer.visible = false
+"
+
+[node name="Combat" type="Node"]
+script = ExtResource("1_nee2l")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="GameUI" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DrawPileButton" type="Button" parent="HUD/GameUI"]
+custom_minimum_size = Vector2(120, 60)
+offset_top = 588.0
+offset_right = 120.0
+offset_bottom = 648.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("2_btn0e")
+text = "Draw Pile"
+
+[node name="ComfirmButton" type="Button" parent="HUD/GameUI"]
+custom_minimum_size = Vector2(120, 60)
+offset_left = 1032.0
+offset_top = 588.0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("2_btn0e")
+text = "Comfirm"
+
+[node name="EndingScreen" type="MarginContainer" parent="HUD"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/EndingScreen"]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="EndingLabel" type="Label" parent="HUD/EndingScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+offset_top = 48.0
+offset_right = 1152.0
+offset_bottom = 348.0
+size_flags_vertical = 10
+theme = ExtResource("15_7lpp5")
+text = "Hello"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/EndingScreen/VBoxContainer"]
+offset_top = 352.0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+alignment = 1
+
+[node name="ConfigButton" type="Button" parent="HUD/EndingScreen/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 150)
+offset_left = 274.0
+offset_right = 574.0
+offset_bottom = 150.0
+size_flags_vertical = 0
+theme = ExtResource("15_7lpp5")
+text = "Back to Config
+"
+script = ExtResource("14_psfcq")
+
+[node name="RestartButton" type="Button" parent="HUD/EndingScreen/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 150)
+offset_left = 578.0
+offset_right = 878.0
+offset_bottom = 150.0
+size_flags_vertical = 0
+theme = ExtResource("15_7lpp5")
+theme_override_font_sizes/font_size = 46
+text = "Restart"
+script = ExtResource("16_hl8ny")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("CombatController") instance=ExtResource("6_hcpsb")]
+position = Vector2(912, 240)
+script = ExtResource("9_cipkr")
+CombatController = NodePath("..")
+Name = "Enemy"
+
+[node name="Deck" parent="Enemy" instance=ExtResource("7_kqeib")]
+
+[node name="Cards" type="Node" parent="Enemy"]
+
+[node name="CardSlots" type="Node" parent="Enemy"]
+script = ExtResource("9_en13f")
+
+[node name="CardSlot1" parent="Enemy/CardSlots" instance=ExtResource("10_y2ssy")]
+position = Vector2(732, 80)
+
+[node name="CardSlot2" parent="Enemy/CardSlots" instance=ExtResource("10_y2ssy")]
+position = Vector2(732, 240)
+
+[node name="CardSlot3" parent="Enemy/CardSlots" instance=ExtResource("10_y2ssy")]
+position = Vector2(732, 400)
+
+[node name="Player" parent="." instance=ExtResource("6_hcpsb")]
+position = Vector2(240, 240)
+Name = "Player"
+
+[node name="Deck" parent="Player" instance=ExtResource("7_kqeib")]
+
+[node name="Hand" parent="Player" instance=ExtResource("8_58xg6")]
+
+[node name="Cards" type="Node" parent="Player"]
+
+[node name="CardSlots" type="Node" parent="Player"]
+script = ExtResource("9_en13f")
+
+[node name="CardSlot1" parent="Player/CardSlots" instance=ExtResource("10_y2ssy")]
+position = Vector2(420, 80)
+
+[node name="CardSlot2" parent="Player/CardSlots" instance=ExtResource("10_y2ssy")]
+position = Vector2(420, 240)
+
+[node name="CardSlot3" parent="Player/CardSlots" instance=ExtResource("10_y2ssy")]
+position = Vector2(420, 400)
+
+[node name="Pointers" type="Node" parent="."]
+script = SubResource("GDScript_15o05")
+
+[node name="BigPointer" parent="Pointers" instance=ExtResource("12_a30sy")]
+visible = false
+position = Vector2(576, 240)
+
+[node name="Pointer1" parent="Pointers" instance=ExtResource("13_wo7o5")]
+visible = false
+position = Vector2(576, 80)
+
+[node name="Pointer2" parent="Pointers" instance=ExtResource("13_wo7o5")]
+visible = false
+position = Vector2(576, 240)
+
+[node name="Pointer3" parent="Pointers" instance=ExtResource("13_wo7o5")]
+visible = false
+position = Vector2(576, 400)
+
+[connection signal="pressed" from="HUD/GameUI/ComfirmButton" to="." method="_on_comfirm_button_pressed"]
+[connection signal="pressed" from="HUD/EndingScreen/VBoxContainer/HBoxContainer/ConfigButton" to="HUD/EndingScreen/VBoxContainer/HBoxContainer/ConfigButton" method="_on_pressed"]
+[connection signal="pressed" from="HUD/EndingScreen/VBoxContainer/HBoxContainer/RestartButton" to="HUD/EndingScreen/VBoxContainer/HBoxContainer/RestartButton" method="_on_pressed"]
+[connection signal="defeated" from="Enemy" to="." method="_on_enemy_defeated"]
+[connection signal="defeated" from="Player" to="." method="_on_player_defeated"]

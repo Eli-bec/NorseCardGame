@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" uid="uid://d1v6kilpf0mma" path="res://Scenes/Combat/cards/Card.tscn" id="1_qw7qf"]
+[ext_resource type="Texture2D" uid="uid://x4lkljwxdaao" path="res://Textures/RedFrame.jpg" id="2_12bge"]
+
+[node name="Card" instance=ExtResource("1_qw7qf")]
+Name = "Sword"
+type = 0
+
+[node name="Frame" parent="." index="0"]
+texture = ExtResource("2_12bge")

@@ -1,0 +1,54 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+_global_script_classes=[{
+"base": "Node2D",
+"class": &"Card",
+"language": &"GDScript",
+"path": "res://Scenes/Combat/cards/Card.gd"
+}, {
+"base": "Sprite2D",
+"class": &"CardSlot",
+"language": &"GDScript",
+"path": "res://Scenes/Combat/slots/CardSlot.gd"
+}, {
+"base": "Sprite2D",
+"class": &"Character",
+"language": &"GDScript",
+"path": "res://Scenes/Combat/characters/Character.gd"
+}]
+_global_script_class_icons={
+"Card": "",
+"CardSlot": "",
+"Character": ""
+}
+
+[application]
+
+config/name="Dead Viking Card Game"
+run/main_scene="res://Scenes/Config.tscn"
+config/features=PackedStringArray("4.0", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+CardEffect="*res://Scripts/Autoload/CardEffect.gd"
+Config="*res://Scripts/Autoload/Config.gd"
+Constants="*res://Scripts/Autoload/Constants.gd"
+Global="*res://Scripts/Autoload/Global.gd"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/Localization.en.translation")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.152941, 0.254902, 0.356863, 1)
