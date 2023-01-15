@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwg6bjv4ghgmx"]
-
-[ext_resource type="Script" path="res://Scenes/Combat/slots/Hand.gd" id="1_xrvy8"]
-[ext_resource type="PackedScene" uid="uid://bhxdm1yduo287" path="res://Scenes/Combat/slots/HandSlot.tscn" id="2_s4x1k"]
-
-[node name="Hand" type="Node"]
-script = ExtResource("1_xrvy8")
-HandSlotScene = ExtResource("2_s4x1k")

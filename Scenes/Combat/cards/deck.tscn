@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b164vwyfkc3ex"]
-
-[ext_resource type="Script" path="res://Scenes/Combat/cards/Deck.gd" id="1_gruxw"]
-
-[node name="Deck" type="Node"]
-script = ExtResource("1_gruxw")

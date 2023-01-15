@@ -1,0 +1,12 @@
+[gd_scene load_steps=6 format=3 uid="uid://irfwmcbfiicl"]
+
+[ext_resource type="Texture2D" uid="uid://cvaao78s7gu2b" path="res://textures/slot.png" id="1_u36nr"]
+[ext_resource type="Script" path="res://helperScenes/slot.gd" id="2_xk45u"]
+[ext_resource type="Texture2D" uid="uid://yr62efe6x2lp" path="res://textures/AttackEnhancer.png" id="3_ssqpm"]
+[ext_resource type="Texture2D" uid="uid://cqmo6irc2os67" path="res://textures/DefendEnhancer.png" id="4_k56fv"]
+[ext_resource type="Texture2D" uid="uid://dx8bapv6chhrp" path="res://textures/SkillEnhancer.png" id="5_5mepu"]
+
+[node name="Slot" type="Sprite2D"]
+texture = ExtResource("1_u36nr")
+script = ExtResource("2_xk45u")
+enhancerSprites = [ExtResource("1_u36nr"), ExtResource("3_ssqpm"), ExtResource("4_k56fv"), ExtResource("5_5mepu")]

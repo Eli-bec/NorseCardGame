@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt1i8tnjbkav"]
+
+[ext_resource type="PackedScene" uid="uid://b70kncdkoq2jv" path="res://helperScenes/card.tscn" id="1_w2pb5"]
+
+[node name="Card" instance=ExtResource("1_w2pb5")]
+
+[node name="Name_Label" parent="display" index="0"]
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+text = "Shield"
+
+[node name="Description_Label" parent="display" index="1"]
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+text = "Block 2"

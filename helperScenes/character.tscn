@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://57dwwvkna72u"]
+
+[ext_resource type="Texture2D" uid="uid://dv5ixmrukwrii" path="res://textures/CharacterBackground.png" id="1_c1k7k"]
+[ext_resource type="Script" path="res://helperScenes/character.gd" id="2_fn4up"]
+
+[node name="Character" type="Sprite2D" node_paths=PackedStringArray("nameLabel", "hpLabel")]
+texture = ExtResource("1_c1k7k")
+script = ExtResource("2_fn4up")
+nameLabel = NodePath("display/Name_Label")
+hpLabel = NodePath("display/HP_Label")
+
+[node name="display" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -110.0
+offset_right = -60.0
+offset_bottom = -110.0
+
+[node name="Name_Label" type="Label" parent="display"]
+offset_top = 70.0
+offset_right = 120.0
+offset_bottom = 108.0
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HP_Label" type="Label" parent="display"]
+offset_top = 112.0
+offset_right = 120.0
+offset_bottom = 150.0
+size_flags_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "HP: n/n"
+horizontal_alignment = 1
+vertical_alignment = 1

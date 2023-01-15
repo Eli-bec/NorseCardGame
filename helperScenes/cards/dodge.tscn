@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bllvr05nym2ou"]
+
+[ext_resource type="PackedScene" uid="uid://b70kncdkoq2jv" path="res://helperScenes/card.tscn" id="1_50va7"]
+
+[node name="Card" instance=ExtResource("1_50va7")]
+
+[node name="Name_Label" parent="display" index="0"]
+layout_mode = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Dodge"
+
+[node name="Description_Label" parent="display" index="1"]
+layout_mode = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "evade the
+next attack"
