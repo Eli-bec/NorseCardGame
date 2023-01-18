@@ -17,11 +17,11 @@ offset_left = -60.0
 offset_top = -110.0
 offset_right = -60.0
 offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Name_Label" type="Label" parent="display"]
-offset_top = 70.0
-offset_right = 120.0
-offset_bottom = 108.0
+layout_mode = 2
 size_flags_vertical = 10
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
@@ -30,9 +30,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HP_Label" type="Label" parent="display"]
-offset_top = 112.0
-offset_right = 120.0
-offset_bottom = 150.0
+layout_mode = 2
 size_flags_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25

@@ -1,27 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://bllvr05nym2ou"]
+[gd_scene load_steps=2 format=3 uid="uid://b04rdujwx1c3o"]
 
 [ext_resource type="PackedScene" uid="uid://b70kncdkoq2jv" path="res://helperScenes/card.tscn" id="1_50va7"]
 
 [node name="Card" instance=ExtResource("1_50va7")]
-cardName = "Dodge"
+cardName = "Shapeshift"
 type = 3
 target = 1
-effects = ["dodge", "dodge_2"]
+effects = ["shapeshift", "shapeshift_2"]
 effectValues = [1.0, 0.0]
 enhancedValues = [0.0, 1.0]
 
 [node name="Name_Label" parent="display" index="0"]
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Dodge"
+text = "Shapeshift"
 
 [node name="Description_Label" parent="display" index="1"]
 theme_override_font_sizes/font_size = 12
-text = "evade the next
-attack of this turn"
+text = "evade all attacks
+this turn"
 
 [node name="Enhancement_Label" parent="display" index="2"]
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 12
-text = "evade the next
-attack during this
-or next turn"
+text = "evade all attacks
+during this and
+next turn"

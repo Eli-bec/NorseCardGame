@@ -23,11 +23,17 @@ _global_script_classes=[{
 "class": &"Slot",
 "language": &"GDScript",
 "path": "res://helperScenes/slot.gd"
+}, {
+"base": "Node2D",
+"class": &"SlotsContainer",
+"language": &"GDScript",
+"path": "res://SlotsContainer.gd"
 }]
 _global_script_class_icons={
 "Card": "",
 "Character": "",
-"Slot": ""
+"Slot": "",
+"SlotsContainer": ""
 }
 
 [application]
@@ -39,7 +45,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Global.gd"
+Globals="*res://Global.gd"
 
 [debug]
 

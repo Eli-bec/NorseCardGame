@@ -3,11 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://b70kncdkoq2jv" path="res://helperScenes/card.tscn" id="1_w2pb5"]
 
 [node name="Card" instance=ExtResource("1_w2pb5")]
+cardName = "Shield"
+type = 2
+target = 1
+effects = ["block"]
+effectValues = [2.0]
+enhancedValues = [4.0]
 
 [node name="Name_Label" parent="display" index="0"]
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 text = "Shield"
 
 [node name="Description_Label" parent="display" index="1"]
-theme_override_colors/font_color = Color(0, 0, 1, 1)
 text = "Block 2"
+
+[node name="Enhancement_Label" parent="display" index="2"]
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+text = "Block 4"

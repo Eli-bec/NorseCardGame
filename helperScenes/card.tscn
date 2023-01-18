@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b70kncdkoq2jv"]
+[gd_scene load_steps=4 format=3 uid="uid://b70kncdkoq2jv"]
 
 [ext_resource type="Texture2D" uid="uid://dbjudg00byb4w" path="res://textures/card.png" id="1_rc38x"]
 [ext_resource type="Script" path="res://helperScenes/card.gd" id="2_tulqj"]
 
 [sub_resource type="SystemFont" id="SystemFont_ydayh"]
 subpixel_positioning = 0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_okf2x"]
-size = Vector2(120, 120)
 
 [node name="Card" type="Sprite2D"]
 texture = ExtResource("1_rc38x")
@@ -44,7 +41,12 @@ text = "description"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_okf2x")
+[node name="Enhancement_Label" type="Label" parent="display"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "description"
+horizontal_alignment = 1
+vertical_alignment = 1

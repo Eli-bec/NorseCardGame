@@ -3,17 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://b70kncdkoq2jv" path="res://helperScenes/card.tscn" id="1_f15vf"]
 
 [node name="Card" instance=ExtResource("1_f15vf")]
+cardName = "Sword"
+type = 1
+target = 2
+effects = ["damage"]
+effectValues = [2.0]
+enhancedValues = [4.0]
 
 [node name="Name_Label" parent="display" index="0"]
-offset_top = 24.0
-offset_right = 120.0
-offset_bottom = 58.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "Sword"
 
 [node name="Description_Label" parent="display" index="1"]
-offset_top = 62.0
-offset_right = 120.0
-offset_bottom = 96.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "Damage 2"
+
+[node name="Enhancement_Label" parent="display" index="2"]
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Damage 4"

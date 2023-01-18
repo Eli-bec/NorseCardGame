@@ -1,73 +1,137 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn1doljqpieg2"]
+[gd_scene load_steps=11 format=3 uid="uid://bn1doljqpieg2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ra6um"]
 [ext_resource type="PackedScene" uid="uid://dtwqyas6gj46s" path="res://helperScenes/cards/sword.tscn" id="2_10f6w"]
 [ext_resource type="PackedScene" uid="uid://57dwwvkna72u" path="res://helperScenes/character.tscn" id="2_erc2b"]
 [ext_resource type="PackedScene" uid="uid://irfwmcbfiicl" path="res://helperScenes/slot.tscn" id="3_kalrp"]
 [ext_resource type="PackedScene" uid="uid://bt1i8tnjbkav" path="res://helperScenes/cards/shield.tscn" id="3_kjes3"]
-[ext_resource type="PackedScene" uid="uid://b70kncdkoq2jv" path="res://helperScenes/card.tscn" id="4_el8vg"]
 [ext_resource type="PackedScene" uid="uid://bllvr05nym2ou" path="res://helperScenes/cards/dodge.tscn" id="4_qboem"]
+[ext_resource type="Script" path="res://SlotsContainer.gd" id="6_sh552"]
+[ext_resource type="Script" path="res://helperScenes/characters/Loki.gd" id="6_xdkgr"]
+[ext_resource type="Texture2D" uid="uid://ccoklnbnb8g3n" path="res://textures/selectFrame.png" id="8_jle18"]
+[ext_resource type="Texture2D" uid="uid://bjky4rrvy7e44" path="res://textures/veil.png" id="9_50nrp"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ra6um")
 packedCards = [ExtResource("2_10f6w"), ExtResource("3_kjes3"), ExtResource("4_qboem")]
 cardProportions = [8, 8, 8]
 
-[node name="player" parent="." instance=ExtResource("2_erc2b")]
-position = Vector2(209, 267)
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PortionButton" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(140, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 22
+text = "Edit Card
+Portions"
+
+[node name="EndTurnButton" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(140, 80)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 22
+text = "End Turn"
 
 [node name="enemy" parent="." instance=ExtResource("2_erc2b")]
 position = Vector2(948, 267)
+script = ExtResource("6_xdkgr")
+
+[node name="player" parent="." instance=ExtResource("2_erc2b")]
+position = Vector2(209, 267)
 
 [node name="PlayerField" type="Node2D" parent="."]
 position = Vector2(476, 84)
+script = ExtResource("6_sh552")
 metadata/_edit_group_ = true
 
 [node name="Slot1" parent="PlayerField" instance=ExtResource("3_kalrp")]
 enhancerType = 1
+slotType = 1
 
 [node name="Slot2" parent="PlayerField" instance=ExtResource("3_kalrp")]
 position = Vector2(0, 150)
 enhancerType = 2
+slotType = 1
 
 [node name="Slot3" parent="PlayerField" instance=ExtResource("3_kalrp")]
 position = Vector2(0, 300)
 enhancerType = 3
+slotType = 1
 
 [node name="EnemyField" type="Node2D" parent="."]
 position = Vector2(668, 84)
+script = ExtResource("6_sh552")
 metadata/_edit_group_ = true
 
 [node name="Slot1" parent="EnemyField" instance=ExtResource("3_kalrp")]
 enhancerType = 1
+slotType = 2
+
+[node name="Veil1" type="Sprite2D" parent="EnemyField/Slot1"]
+z_index = 1
+texture = ExtResource("9_50nrp")
 
 [node name="Slot2" parent="EnemyField" instance=ExtResource("3_kalrp")]
 position = Vector2(0, 150)
 enhancerType = 2
+slotType = 2
+
+[node name="Veil2" type="Sprite2D" parent="EnemyField/Slot2"]
+z_index = 1
+texture = ExtResource("9_50nrp")
 
 [node name="Slot3" parent="EnemyField" instance=ExtResource("3_kalrp")]
 position = Vector2(0, 300)
 enhancerType = 3
+slotType = 2
+
+[node name="Veil3" type="Sprite2D" parent="EnemyField/Slot3"]
+z_index = 1
+texture = ExtResource("9_50nrp")
 
 [node name="Hand" type="Node2D" parent="."]
 position = Vector2(572, 567)
+script = ExtResource("6_sh552")
 metadata/_edit_group_ = true
 
 [node name="Slot1" parent="Hand" instance=ExtResource("3_kalrp")]
 position = Vector2(-300, 0)
+slotType = 3
 
 [node name="Slot2" parent="Hand" instance=ExtResource("3_kalrp")]
 position = Vector2(-150, 0)
+slotType = 3
 
 [node name="Slot3" parent="Hand" instance=ExtResource("3_kalrp")]
+slotType = 3
 
 [node name="Slot4" parent="Hand" instance=ExtResource("3_kalrp")]
 position = Vector2(150, 0)
+slotType = 3
 
 [node name="Slot5" parent="Hand" instance=ExtResource("3_kalrp")]
 position = Vector2(300, 0)
+slotType = 3
 
-[node name="Card" parent="." instance=ExtResource("4_el8vg")]
-position = Vector2(101, 464)
+[node name="SelectFrame" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(75, 84)
+texture = ExtResource("8_jle18")
 
-[connection signal="clicked" from="Card" to="." method="_on_card_clicked"]
+[connection signal="pressed" from="MarginContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="clicked" from="PlayerField/Slot1" to="." method="_on_slot_clicked"]
+[connection signal="clicked" from="PlayerField/Slot2" to="." method="_on_slot_clicked"]
+[connection signal="clicked" from="PlayerField/Slot3" to="." method="_on_slot_clicked"]
+[connection signal="clicked" from="Hand/Slot1" to="." method="_on_slot_clicked"]
+[connection signal="clicked" from="Hand/Slot2" to="." method="_on_slot_clicked"]
+[connection signal="clicked" from="Hand/Slot3" to="." method="_on_slot_clicked"]
+[connection signal="clicked" from="Hand/Slot4" to="." method="_on_slot_clicked"]
+[connection signal="clicked" from="Hand/Slot5" to="." method="_on_slot_clicked"]
