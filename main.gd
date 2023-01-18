@@ -80,14 +80,14 @@ func _on_end_turn_button_pressed():
 	for veil in veils:
 		veil.visible = false
 	
-	var tweens:Array[Tween] = []
+	var tweens:Array[Tween] = [get_tree().create_tween()]
+	tweens[0].tween_interval(1)
 	for i in range(3):
 		tweens.append(
 			evaluate_row($PlayerField.get_child(i), $EnemyField.get_child(i)))
-	print(tweens)
-	for i in range(2):
+	for i in range(3):
 		tweens[i].chain().tween_callback(tweens[i+1].play)
-	tweens[2].tween_callback(new_turn)
+	tweens[3].tween_callback(new_turn)
 	tweens[0].play()
 	resolve_end_turn_effects($player)
 	resolve_end_turn_effects($enemy)
