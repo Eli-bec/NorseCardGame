@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn1doljqpieg2"]
+[gd_scene load_steps=13 format=3 uid="uid://bqigo56s735u6"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ra6um"]
 [ext_resource type="PackedScene" uid="uid://dtwqyas6gj46s" path="res://helperScenes/cards/sword.tscn" id="2_10f6w"]
-[ext_resource type="PackedScene" uid="uid://57dwwvkna72u" path="res://helperScenes/character.tscn" id="2_erc2b"]
+[ext_resource type="PackedScene" uid="uid://crchsftxu3w8q" path="res://backup/_character.tscn" id="2_erc2b"]
 [ext_resource type="PackedScene" uid="uid://irfwmcbfiicl" path="res://helperScenes/slot.tscn" id="3_kalrp"]
 [ext_resource type="PackedScene" uid="uid://bt1i8tnjbkav" path="res://helperScenes/cards/shield.tscn" id="3_kjes3"]
 [ext_resource type="PackedScene" uid="uid://bllvr05nym2ou" path="res://helperScenes/cards/dodge.tscn" id="4_qboem"]
+[ext_resource type="PackedScene" uid="uid://pidnbeeswvqx" path="res://helperScenes/optionMenu/option_menu.tscn" id="5_qxdk5"]
 [ext_resource type="Script" path="res://SlotsContainer.gd" id="6_sh552"]
+[ext_resource type="PackedScene" path="res://helperScenes/dialog/dialog_manager.tscn" id="6_wa0vb"]
 [ext_resource type="Script" path="res://helperScenes/characters/Loki.gd" id="6_xdkgr"]
 [ext_resource type="Texture2D" uid="uid://ccoklnbnb8g3n" path="res://textures/selectFrame.png" id="8_jle18"]
 [ext_resource type="Texture2D" uid="uid://bjky4rrvy7e44" path="res://textures/veil.png" id="9_50nrp"]
@@ -23,14 +25,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PortionButton" type="Button" parent="MarginContainer"]
+[node name="optionButton" type="Button" parent="MarginContainer"]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 22
-text = "Edit Card
-Portions"
+text = "Testing
+options"
 
 [node name="EndTurnButton" type="Button" parent="MarginContainer"]
 custom_minimum_size = Vector2(140, 80)
@@ -39,6 +41,11 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 22
 text = "End Turn"
+
+[node name="OptionMenu" parent="." instance=ExtResource("5_qxdk5")]
+visible = false
+
+[node name="dialogManager" parent="." instance=ExtResource("6_wa0vb")]
 
 [node name="enemy" parent="." instance=ExtResource("2_erc2b")]
 position = Vector2(948, 267)
@@ -126,7 +133,9 @@ visible = false
 position = Vector2(75, 84)
 texture = ExtResource("8_jle18")
 
+[connection signal="pressed" from="MarginContainer/optionButton" to="." method="_on_optionmenu_button_pressed"]
 [connection signal="pressed" from="MarginContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="enhancer_option_item_selected" from="OptionMenu" to="." method="_on_enhancer_option_item_selected"]
 [connection signal="clicked" from="PlayerField/Slot1" to="." method="_on_slot_clicked"]
 [connection signal="clicked" from="PlayerField/Slot2" to="." method="_on_slot_clicked"]
 [connection signal="clicked" from="PlayerField/Slot3" to="." method="_on_slot_clicked"]

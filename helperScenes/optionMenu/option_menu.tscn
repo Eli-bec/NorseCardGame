@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://pidnbeeswvqx"]
+
+[ext_resource type="Script" path="res://helperScenes/optionMenu/option_menu.gd" id="1_nax3y"]
+
+[node name="OptionMenu" type="Control"]
+z_index = 10
+layout_mode = 3
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.98
+offset_right = 0.00012207
+script = ExtResource("1_nax3y")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+offset_right = 1105.0
+offset_bottom = 622.0
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.98
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Enhancer settings"
+
+[node name="enhancerOption" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "static ADS"
+popup/item_0/id = 0
+popup/item_1/text = "static none"
+popup/item_1/id = 1
+popup/item_2/text = "rotate ADS -> SAD"
+popup/item_2/id = 2
+
+[node name="exitButton" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Save & Exit"
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/enhancerOption" to="." method="_on_enhancer_option_item_selected"]
+[connection signal="pressed" from="MarginContainer/exitButton" to="." method="_on_exit_button_pressed"]

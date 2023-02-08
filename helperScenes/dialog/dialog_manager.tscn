@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1bujd4mq0ejr"]
+
+[ext_resource type="Script" path="res://helperScenes/dialog/dialogueManager.gd" id="1_bc13i"]
+
+[node name="dialogueManager" type="Control"]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bc13i")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = 11.52
+offset_top = 427.68
+offset_right = 1139.52
+offset_bottom = 647.68
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.67
+anchor_right = 0.97
+anchor_bottom = 0.99
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="nameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "[Name]"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Dialog here"

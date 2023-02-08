@@ -9,18 +9,21 @@ enum Target {
 }
 
 @export var cardName:String = ""
-@export var type:Globals.CardType
+@export var type:Global.CardType
 @export var target:Target
 
-@export var effects:Array[String]
-@export var effectValues:Array[float]
-@export var enhancedValues:Array[float]
+#@export var effectNames:Array[String]
+#@export var effectValues:Array[float]
+#@export var effectVariations:Array[int]
+#@export var enhancedValues:Array[float]
+#@export var enhancedVariations:Array[int]
 
 @onready var enhancement_des_label = $display/Enhancement_Label
 @onready var description_label = $display/Description_Label
 
-var enhanced:bool = false
+var enhanced:bool = false : set = set_enhancement
 
+var slot:Slot
 
 func _ready():
 	if cardName != "":
@@ -33,13 +36,5 @@ func set_enhancement(value:bool):
 	enhancement_des_label.visible = enhanced
 	description_label.visible = not enhanced
 
-#func _unhandled_input(event):
-#	if (
-#		not Globals.suppress_input and 
-#		event is InputEventMouseButton and
-#		event.button_index == MOUSE_BUTTON_LEFT and 
-#		event.is_action_pressed("click") and 
-#		get_rect().has_point(get_local_mouse_position())
-#	):
-#		print($display/Name_Label.text)
-#		emit_signal("clicked", self)
+func resolve(target:Character):
+	pass

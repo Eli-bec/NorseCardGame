@@ -1,0 +1,6 @@
+extends Character
+
+
+
+func _on_game_new_turn():
+	print('player: new turn')

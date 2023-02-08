@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddscdlnymlm50"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_q6j4g"]
+[ext_resource type="PackedScene" uid="uid://b1bujd4mq0ejr" path="res://helperScenes/dialog/dialog_manager.tscn" id="2_e577r"]
+[ext_resource type="PackedScene" uid="uid://cbwuimwod0gtj" path="res://helperScenes/characterDisplay.tscn" id="4_wecwm"]
+[ext_resource type="PackedScene" uid="uid://dwj3euw3jtnbs" path="res://combat.tscn" id="5_aef87"]
+[ext_resource type="PackedScene" uid="uid://u4fmo4chadyp" path="res://helperScenes/dialog/sequences/Loki_half_hp.tscn" id="5_b1dtg"]
+[ext_resource type="PackedScene" uid="uid://depxlyierwns0" path="res://helperScenes/dialog/sequences/loki_lost_dialogue.tscn" id="6_v821u"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_q6j4g")
+
+[node name="Combat" parent="." node_paths=PackedStringArray("playerDisplay", "enemyDisplay", "midDialogue", "endDialogue") instance=ExtResource("5_aef87")]
+visible = false
+playerDisplay = NodePath("../playerDisplay")
+enemyDisplay = NodePath("../enemyDisplay")
+midDialogue = NodePath("../bubbleDialogueManager")
+endDialogue = NodePath("../LokiLostDialogue")
+
+[node name="enemyDisplay" parent="." instance=ExtResource("4_wecwm")]
+position = Vector2(948, 267)
+
+[node name="playerDisplay" parent="." instance=ExtResource("4_wecwm")]
+position = Vector2(204, 267)
+
+[node name="dialogueManager" parent="." instance=ExtResource("2_e577r")]
+
+[node name="bubbleDialogueManager" parent="." instance=ExtResource("5_b1dtg")]
+visible = false
+z_index = 1
+
+[node name="LokiLostDialogue" parent="." instance=ExtResource("6_v821u")]
+visible = false
+
+[connection signal="start_combat" from="." to="Combat" method="_on_game_start_combat"]

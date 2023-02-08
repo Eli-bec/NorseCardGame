@@ -9,15 +9,35 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Control",
+"class": &"BubbleDialogueSequence",
+"language": &"GDScript",
+"path": "res://helperScenes/dialog/bubble_dialogue_manager.gd"
+}, {
 "base": "Sprite2D",
 "class": &"Card",
 "language": &"GDScript",
 "path": "res://helperScenes/card.gd"
 }, {
-"base": "Sprite2D",
+"base": "Node",
 "class": &"Character",
 "language": &"GDScript",
 "path": "res://helperScenes/character.gd"
+}, {
+"base": "Sprite2D",
+"class": &"CharacterDisplay",
+"language": &"GDScript",
+"path": "res://helperScenes/characterDisplay.gd"
+}, {
+"base": "Node",
+"class": &"Deck",
+"language": &"GDScript",
+"path": "res://helperScenes/Deck.gd"
+}, {
+"base": "Control",
+"class": &"DialogueManager",
+"language": &"GDScript",
+"path": "res://helperScenes/dialog/dialogueManager.gd"
 }, {
 "base": "Sprite2D",
 "class": &"Slot",
@@ -30,22 +50,27 @@ _global_script_classes=[{
 "path": "res://SlotsContainer.gd"
 }]
 _global_script_class_icons={
+"BubbleDialogueSequence": "",
 "Card": "",
 "Character": "",
+"CharacterDisplay": "",
+"Deck": "",
+"DialogueManager": "",
 "Slot": "",
 "SlotsContainer": ""
 }
 
 [application]
 
-config/name="Norse Card Game (Prototype 2)"
-run/main_scene="res://main.tscn"
+config/name="Norse Card Game (Prototype 2.1)"
+run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Globals="*res://Global.gd"
+Global="*res://Global.gd"
+Util="*res://util.gd"
 
 [debug]
 

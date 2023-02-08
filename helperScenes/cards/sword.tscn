@@ -1,14 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtwqyas6gj46s"]
+[gd_scene load_steps=3 format=3 uid="uid://dtwqyas6gj46s"]
 
 [ext_resource type="PackedScene" uid="uid://b70kncdkoq2jv" path="res://helperScenes/card.tscn" id="1_f15vf"]
+[ext_resource type="Script" path="res://helperScenes/cards/sword.gd" id="2_asa5v"]
 
 [node name="Card" instance=ExtResource("1_f15vf")]
-cardName = "Sword"
+script = ExtResource("2_asa5v")
+cardName = "sword"
 type = 1
 target = 2
-effects = ["damage"]
-effectValues = [2.0]
-enhancedValues = [4.0]
 
 [node name="Name_Label" parent="display" index="0"]
 theme_override_colors/font_color = Color(1, 0, 0, 1)

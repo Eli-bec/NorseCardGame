@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://6181d6vi0r7j"]
+
+[ext_resource type="PackedScene" uid="uid://cmx4nc0p8jfmw" path="res://helperScenes/character.tscn" id="1_y2qmc"]
+[ext_resource type="Script" path="res://helperScenes/characters/Loki.gd" id="2_72fvk"]
+
+[node name="Loki" instance=ExtResource("1_y2qmc")]
+script = ExtResource("2_72fvk")

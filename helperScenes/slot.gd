@@ -10,22 +10,26 @@ enum SlotType {
 
 signal clicked(slot:Slot)
 
-@export var enhancerType:Globals.CardType = Globals.CardType.DEFAULT
+@export var enhancerType:Global.CardType = Global.CardType.DEFAULT
 @export var slotType:SlotType = SlotType.DEFAULT
 @export var capacity:int = 1
 
 @export var enhancerSprites:Array[Texture2D]
 
-var cards:Array
+var card:Card = null
 
 
 func _ready():
+	update_texture()
+
+
+func update_texture():
 	texture = enhancerSprites[enhancerType]
 
 
 func _unhandled_input(event):
 	if (
-		not Globals.suppress_input and
+		not Global.suppress_input and
 		event is InputEventMouseButton and
 		event.button_index == MOUSE_BUTTON_LEFT and
 		event.pressed and
@@ -33,6 +37,5 @@ func _unhandled_input(event):
 	):
 		emit_signal("clicked", self)
 
-
-func full() -> bool:
-	return cards.size() >= capacity
+func is_empty() -> bool:
+	return card == null

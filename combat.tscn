@@ -1,0 +1,137 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwj3euw3jtnbs"]
+
+[ext_resource type="Script" path="res://SlotsContainer.gd" id="1_heypn"]
+[ext_resource type="Script" path="res://combat.gd" id="1_ikaf7"]
+[ext_resource type="PackedScene" uid="uid://irfwmcbfiicl" path="res://helperScenes/slot.tscn" id="2_4rmlr"]
+[ext_resource type="Texture2D" uid="uid://bjky4rrvy7e44" path="res://textures/veil.png" id="3_60eit"]
+[ext_resource type="Texture2D" uid="uid://ccoklnbnb8g3n" path="res://textures/selectFrame.png" id="4_efa4k"]
+[ext_resource type="PackedScene" uid="uid://cek51r33kqc0p" path="res://helperScenes/characters/player.tscn" id="6_hwg64"]
+[ext_resource type="PackedScene" uid="uid://6181d6vi0r7j" path="res://helperScenes/characters/Loki.tscn" id="7_k2h47"]
+
+[node name="Combat" type="Node2D"]
+script = ExtResource("1_ikaf7")
+
+[node name="PlayerField" type="Node2D" parent="."]
+position = Vector2(476, 84)
+script = ExtResource("1_heypn")
+metadata/_edit_group_ = true
+
+[node name="Slot1" parent="PlayerField" instance=ExtResource("2_4rmlr")]
+enhancerType = 1
+slotType = 1
+
+[node name="Slot2" parent="PlayerField" instance=ExtResource("2_4rmlr")]
+position = Vector2(0, 150)
+enhancerType = 2
+slotType = 1
+
+[node name="Slot3" parent="PlayerField" instance=ExtResource("2_4rmlr")]
+position = Vector2(0, 300)
+enhancerType = 3
+slotType = 1
+
+[node name="EnemyField" type="Node2D" parent="."]
+position = Vector2(668, 84)
+script = ExtResource("1_heypn")
+metadata/_edit_group_ = true
+
+[node name="Slot1" parent="EnemyField" instance=ExtResource("2_4rmlr")]
+slotType = 2
+
+[node name="Veil1" type="Sprite2D" parent="EnemyField/Slot1"]
+visible = false
+z_index = 1
+texture = ExtResource("3_60eit")
+
+[node name="Slot2" parent="EnemyField" instance=ExtResource("2_4rmlr")]
+position = Vector2(0, 150)
+slotType = 2
+
+[node name="Veil2" type="Sprite2D" parent="EnemyField/Slot2"]
+visible = false
+z_index = 1
+texture = ExtResource("3_60eit")
+
+[node name="Slot3" parent="EnemyField" instance=ExtResource("2_4rmlr")]
+position = Vector2(0, 300)
+slotType = 2
+
+[node name="Veil3" type="Sprite2D" parent="EnemyField/Slot3"]
+visible = false
+z_index = 1
+texture = ExtResource("3_60eit")
+
+[node name="Hand" type="Node2D" parent="."]
+position = Vector2(572, 567)
+script = ExtResource("1_heypn")
+metadata/_edit_group_ = true
+
+[node name="Slot1" parent="Hand" instance=ExtResource("2_4rmlr")]
+position = Vector2(-300, 0)
+slotType = 3
+
+[node name="Slot2" parent="Hand" instance=ExtResource("2_4rmlr")]
+position = Vector2(-150, 0)
+slotType = 3
+
+[node name="Slot3" parent="Hand" instance=ExtResource("2_4rmlr")]
+slotType = 3
+
+[node name="Slot4" parent="Hand" instance=ExtResource("2_4rmlr")]
+position = Vector2(150, 0)
+slotType = 3
+
+[node name="Slot5" parent="Hand" instance=ExtResource("2_4rmlr")]
+position = Vector2(300, 0)
+slotType = 3
+
+[node name="SelectFrame" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(75, 84)
+texture = ExtResource("4_efa4k")
+
+[node name="player" parent="." instance=ExtResource("6_hwg64")]
+
+[node name="enemy" parent="." instance=ExtResource("7_k2h47")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 649.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="optionButton" type="Button" parent="MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(140, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 22
+text = "Testing
+options"
+
+[node name="EndTurnButton" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(140, 80)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 22
+text = "End Turn"
+
+[node name="veilToggle" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(140, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "show 
+enemy cards"
+
+[connection signal="new_turn" from="." to="." method="_on_new_turn"]
+[connection signal="new_turn" from="." to="player" method="_on_combat_new_turn"]
+[connection signal="new_turn" from="." to="enemy" method="_on_combat_new_turn"]
+[connection signal="defeat_dialogue" from="enemy" to="." method="_on_enemy_defeat_dialogue"]
+[connection signal="hp_change" from="enemy" to="enemy" method="_on_hp_change"]
+[connection signal="mid_battle_dialogue" from="enemy" to="." method="_on_enemy_mid_battle_dialogue"]
+[connection signal="pressed" from="MarginContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="MarginContainer/veilToggle" to="." method="_on_veil_toggle_pressed"]

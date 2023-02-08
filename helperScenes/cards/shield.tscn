@@ -1,22 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt1i8tnjbkav"]
+[gd_scene load_steps=4 format=3 uid="uid://bt1i8tnjbkav"]
 
-[ext_resource type="PackedScene" uid="uid://b70kncdkoq2jv" path="res://helperScenes/card.tscn" id="1_w2pb5"]
+[ext_resource type="Texture2D" uid="uid://dbjudg00byb4w" path="res://textures/card.png" id="1_o255u"]
+[ext_resource type="Script" path="res://helperScenes/cards/shield.gd" id="2_2cm5v"]
 
-[node name="Card" instance=ExtResource("1_w2pb5")]
-cardName = "Shield"
+[sub_resource type="SystemFont" id="SystemFont_ydayh"]
+subpixel_positioning = 0
+
+[node name="Card" type="Sprite2D"]
+texture = ExtResource("1_o255u")
+script = ExtResource("2_2cm5v")
+cardName = "block"
 type = 2
 target = 1
-effects = ["block"]
-effectValues = [2.0]
-enhancedValues = [4.0]
 
-[node name="Name_Label" parent="display" index="0"]
+[node name="display" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+offset_right = -60.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="Name_Label" type="Label" parent="display"]
+layout_mode = 2
+size_flags_vertical = 10
 theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_ydayh")
+theme_override_font_sizes/font_size = 22
 text = "Shield"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Description_Label" parent="display" index="1"]
+[node name="Description_Label" type="Label" parent="display"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
 text = "Block 2"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Enhancement_Label" parent="display" index="2"]
+[node name="Enhancement_Label" type="Label" parent="display"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_font_sizes/font_size = 22
 text = "Block 4"
+horizontal_alignment = 1
+vertical_alignment = 1

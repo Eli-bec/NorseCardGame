@@ -8,7 +8,7 @@ extends Node
 	$EnemyField/Slot2/Veil2,
 	$EnemyField/Slot3/Veil3
 ]
-@onready var portion_button = $MarginContainer/PortionButton
+@onready var option_button = $MarginContainer/optionButton
 @onready var end_turn_button = $MarginContainer/EndTurnButton
 
 var rng = RandomNumberGenerator.new()
@@ -16,6 +16,9 @@ var rng = RandomNumberGenerator.new()
 var selectedSlot:Slot = null
 
 func _ready():
+	Global.connect('input_suppression_changed', on_input_suppression_changed)
+	
+	$dialogManager.show_sequence([['Loki', 'hi'], ['MC', 'Loki!']])
 	$player.init("Player", 10, 10)
 	$enemy.init("Loki", 12, 12)
 	deal_cards()
@@ -48,8 +51,6 @@ func move_card(card:Card, dest:Slot) -> bool:
 	if dest.cards.size() == dest.capacity: return false
 	dest.cards.append(card)
 	card.global_position = dest.global_position
-#	print(card)
-#	print(card.type, ' ', dest.enhancerType)
 	card.set_enhancement(card.type == dest.enhancerType)
 	return true
 
@@ -76,7 +77,7 @@ func _on_slot_clicked(slot:Slot):
 # combat logics here
 func _on_end_turn_button_pressed():
 	print("combat started")
-	set_input_suppression(true)
+	Global.suppress_input = false
 	for veil in veils:
 		veil.visible = false
 	
@@ -94,7 +95,7 @@ func _on_end_turn_button_pressed():
 
 func new_turn():
 	print("new turn")
-	set_input_suppression(false)
+	Global.suppress_input = false
 	for veil in veils:
 		veil.visible = true
 	for slot in $PlayerField.get_children() + $EnemyField.get_children():
@@ -144,7 +145,6 @@ func evaluate_row(player_slot, enemy_slot) -> Tween:
 	# evaluate card effects
 	for card in player_slot.cards:
 		var target = get_card_target(card, true)
-		print(card, card.enhanced)
 		apply_effects(target, card)
 #	print("player effects: ", $player.effects)
 	for card in enemy_slot.cards:
@@ -295,19 +295,18 @@ func anim_card_fade(tween, card, is_players:bool):
 	tween.parallel()
 
 
-func get_countered_type(type:Globals.CardType) -> int:
-	if type == Globals.CardType.DEFEND:
-		return Globals.CardType.ATTACK
-	if type == Globals.CardType.ATTACK:
-		return Globals.CardType.SKILL
-	if type == Globals.CardType.SKILL:
-		return Globals.CardType.DEFEND
+func get_countered_type(type:Global.CardType) -> int:
+	if type == Global.CardType.DEFEND:
+		return Global.CardType.ATTACK
+	if type == Global.CardType.ATTACK:
+		return Global.CardType.SKILL
+	if type == Global.CardType.SKILL:
+		return Global.CardType.DEFEND
 	return -1
 
 
-func set_input_suppression(value:bool):
-	Globals.suppress_input = value
-	portion_button.disabled = value
+func on_input_suppression_changed(value:bool):
+	option_button.disabled = value
 	end_turn_button.disabled = value
 
 
@@ -317,3 +316,28 @@ func enemy_play_cards():
 		if cards[i] == null: continue
 		add_child(cards[i])
 		move_card(cards[i], $EnemyField.get_child(i))
+
+
+func _on_optionmenu_button_pressed():
+	$OptionMenu.visible = true
+
+
+func _on_enhancer_option_item_selected(index):
+	# static ADS
+	if index == 0 or index == 2:
+		$PlayerField/Slot1.enhancerType = Global.CardType.ATTACK
+		$PlayerField/Slot2.enhancerType = Global.CardType.DEFEND
+		$PlayerField/Slot3.enhancerType = Global.CardType.SKILL
+		$EnemyField/Slot1.enhancerType = Global.CardType.ATTACK
+		$EnemyField/Slot2.enhancerType = Global.CardType.DEFEND
+		$EnemyField/Slot3.enhancerType = Global.CardType.SKILL
+	# static none
+	elif index == 1:
+		$PlayerField/Slot1.enhancerType = Global.CardType.DEFAULT
+		$PlayerField/Slot2.enhancerType = Global.CardType.DEFAULT
+		$PlayerField/Slot3.enhancerType = Global.CardType.DEFAULT
+		$EnemyField/Slot1.enhancerType = Global.CardType.DEFAULT
+		$EnemyField/Slot2.enhancerType = Global.CardType.DEFAULT
+		$EnemyField/Slot3.enhancerType = Global.CardType.DEFAULT
+	for slot in $PlayerField.get_children() + $EnemyField.get_children():
+		slot.update_texture()
